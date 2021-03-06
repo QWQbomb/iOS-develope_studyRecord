@@ -1,0 +1,120 @@
+/** tableView */
+UITableView
+继承自UIScrollView 支持垂直滚动 性能极佳
+
+ViewController.m中
+
+@interface ViewController ()<UIScrollView>
+
+
+-(void)viewDidLoad{
+	[super viewDidLoad];
+	//设置数据源
+	self.tableView.dataSource=self;
+}
+
+/* 告诉tableView 一共有几组数据 */
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+	return 4;
+}
+/* 告诉tableView 第Section组有几行数据 */
+-(NSInteger)tableView:(UITableView *)tableView
+	numberOfRowsInSection:(NSInteger)section{
+	if(section==0){
+		return 2;
+	}else if (section==1){
+		return 6;
+	}else{
+		return 1;
+	}
+}
+/* 告诉tableView 每一行显示的内容 */
+-(UITableView *)tableView:(UITableView *)tableView
+	cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+		UITableView *cell = [[UITableViewCell alloc] init];
+		//设置在最外层 每一行都会有最右边的尖箭头
+		//cell.accessoryType= UITableViewCellAccessoryDisclosureIndicator;
+		//给右边加上switch
+		cell.accessoryView= [[UISwitch alloc]init];
+		if(indexPath.section==0){
+			if(indexPath.row==0){
+				cell.textLabel.text=@"通用";
+			}else if(indexPath.row==1){
+				cell.textLabel.text=@"隐私";
+			}
+		}else if(indexPath.section==1){
+			cell.textLabel.text=@"密码与账户";
+		}else{
+			cell.textLabel.text=[NSString
+			stringWithFormat:@"%ld组%ld行-数据",indexPath.
+			section,indexPath.row];
+		}
+		return cell;
+	}
+	
+/** 例子：展示各类汽车品牌 */
+CarViewController.m中
+
+@interface CarViewController()<UITableView>
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@end
+@implementation CarViewController
+-(void)viewDidLoad{
+	[super viewDidLoad];
+	//设置数据源
+	self.tableView.dataSource=self;
+}
+/* 告诉tableView 每一组的头部标题 */
+-(NSString *)tableView:(UITableView *)tableView
+	titleForHeaderInSection:(NSInteger)section{
+		if(section==0) return @"德系品牌";
+		else if(section==1) return @"日系品牌";
+		else return @"意系品牌";
+	}
+-(NSString *)tableView:(UITableView *)tableView
+	titleForFooterInSection:(NSInteger)section{
+		if(section==0) return @"热衷追求质量的德系车在外观和性能都下足了功夫";
+		else if(section==1) return @"日系车这些年来在国内持续火爆，通过汽车销量数据，我们发现进入十强的汽车8无一例外全是日系。";
+		else return @"挑战极限，高傲不凡，豪放不羁。";
+	}		
+
+
+//小优化
+	NSString *name - nil;
+	NSString *icon = nil;
+	if(indexPath.section==0){
+		if(indexPath.row==0){
+			name=@"奔驰";
+			icon=@"bc";
+		}......
+	}	
+	cell.textLabel.text=name;
+	cell.inmageView.image=[UIImage imageNamed:icon];
+	return cell
+	
+//大优化 不写死
+/*头部标题*/
+
+/*底部标题*/
+
+/*部标题*/
+	
+/* 后台传来所有的数据 */
+@property (nonatomic, strong) NSArray *carGroups;
+
+@end
+
+......
+
+-(void)viewDidLoad{
+	...
+	//
+	
+	CarGroup *group1 = [[CarGroup alloc] init];
+	group1.header=@"德系品牌";
+	group1.footer=@"";
+	group1.cars=@[[Car carWithName:@"" icon:@""],[Car carWithName:@"" icon:""]];
+	
+	
+}
+	

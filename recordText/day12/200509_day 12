@@ -1,0 +1,69 @@
+Masonry 目前最流行的第三方框架
+用优雅的代码编写 Autolayout 大大提高了开发效率
+框架地址: https://github.com/SnapKit/Masonry
+
+导包时通常只导 Masonry.h
+
+//使用Masonry添加约束
+[redView mas_makeConstraints:^(MASConstrainMaker *make){
+	//2.1 top offset偏移量 multipliedBy是1.0时可以省略
+	make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop).multipliedBy(1.0)
+	.offset(20);
+	make.left.equalTo(self.view.mas_left).multipliedBy(1.0)
+	.offset(20);
+	make.right.equalTo(self.view.mas_right).multipliedBy(1.0)
+	.offset(-20);
+	make.bottom.equalTo(self.view.mas_bottom).multipliedBy(1.0)
+	.offset(-20);
+	//简化版如下
+	make.top.and.left.offset(30);//链式调用
+	make.right.and.bottom.offset(-30);//and 也可以省略
+	//极简
+	make.edges.insets(UIEdgeInsetsMake
+	(34,20,34,20));
+	
+
+}];
+
+	//1.红色高100 宽100的 UIView 放在屏幕正中央
+	//2.添加约束
+	[redView mas_makeConstraints:^(MASConstrainMaker *make){
+		make.width.equalTo(@100);//id类型
+		//make.width.mas_equalTo(100); Masonry提供的 更智能
+		make.height.equalTo(@100);//id类型
+		make.centerX.equalTo(self.view.mas_centerX);
+		//make.centerX; 最简
+		make.centerY.equalTo(self.view.mas_centerY);
+		//make.centerY;
+		
+		//make.size.mas_equalTo(CGSizeMake(100,100));
+		//make.center.mas_equalTo(self.view);
+	}];
+	
+	//3.设置蓝色View的约束
+	[blueView mas_makeConstraints:^(MASConstrainMaker *make){
+		make.left.mas_equalTo(self.view.mas_left).offset(30);
+		make.bottom.mas_equalTo(self.view
+		.mas_safeAreaLayoutGuideBottom).offset(-30);
+		make.right.mas_equalTo(redView.mas_left).offset(-30);
+		make.width.mas_equalTo(redView.mas_width);
+		//高度50
+		make.height.mas_equalTo(50);
+	}];
+	//4.设置红色View的约束
+	
+	//去掉属性前的mas_
+	#define MAS_SHORTHAND
+	//去掉方法前的mas_
+	#define MAS_SHORTHAND_GLOBAL
+	
+-(void)test{
+	//放本节课代码
+}
+
+优先级可以有效解决约束冲突问题
+
+
+	
+	
+	

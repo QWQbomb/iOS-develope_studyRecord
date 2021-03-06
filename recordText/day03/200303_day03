@@ -1,0 +1,16 @@
+按钮 UIButton
+既能显示文字，又能显示图片。
+normal/highlight/disabled
+普通状态/高亮状态（按下未松手）/失效状态
+UIButton *button = [UIButton buttonWithType:UIButtonTyperCustom];
+//4.为Button添加点击事件
+//Target:目标 (让谁做事情)
+//action:方法 (做什么事情)
+//Events:事件 (触发条件)
+[button addTarget:(id) action:(SEL选择器 取方法的地址) 
+	forControlEvents:(UIControlEvents)]        ↓带参加冒号
+例如 [button addTarget:(self) action:@selector(test:) 
+	forControlEvents:(UIControlEventTouchUpInside)];
+	
+综合案例 九宫格算法
+UIView嵌套

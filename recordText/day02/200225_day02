@@ -1,0 +1,86 @@
+UIView 控件详细介绍
+
+按钮UIButton 文本UILabel 都是控件
+共同属性：尺寸、位置、背景色……都是继承与UIView
+
+父控件与子控件
+A在B中
+则A为子B为父控件
+
+View 是一个视图 ViewControl则拖出另一个手机
+View 里还能再放其子控件
+控制器本身不可见 能够看到的是控制器的View
+
+UIView 的常见属性
+ *superview;父控件
+ *subviews;子控件们
+ 
+-(void)viewDidLoad {
+	[super viewDidLoad]
+	//刚开始的函数
+	 NSLog(@"绿色view的父控件",self.greenView.superview)
+}
+
+-(void)addSubview:(UIView *)view;
+添加一个子控件view
+-(void)removeFromSuperview;
+将自己从父控件中移除
+
+UISwitch *sw = [[UISwitch alloc] init];
+[self.view addSubview:sw];//将开关自己添加到view
+
+[sw removeFromSuperview;]
+
+设置label的位置和大小 frame
+方法1:label.frame = CGRectMake(CGFloat x 靠左 ,CGFloat y,
+ 靠右 ,宽,高)
+ label.backgroundColor = [UIColor redColor];
+方法2: layoutSubviews 设置子控件的位置
+自动换行
+lable.numberOfLinds = 1;
+
+显示模式
+label.lineBreakMode = ...;
+
+//常用 imageView
+//设置 frame
+
+//设置图片
+imageView.image = [UIImage imageNamed:@"1"];
+图片只有.png后缀能省略
+//设置图片的内容模式
+imageView.contentMode = ...
+//允许裁剪图片
+imageView.clipsToBounds = YES;
+//毛玻璃效果
+UIToolbar *toolbar = [[UIToolbar alloc]init];
+//toolbar 设置 frame
+toolbar.frame = CGRectMake(,,,,);
+等效于 toolbar.frame = imageView.bounds;
+[imageView addSubview:toolbar];
+//设置透明度
+toolbar.alpha = 0.5;
+
+动画效果
+-(IBAction)startAnimation{
+	NSMutableArray<UIImage *> *imgArr = 
+		[NSMutableArray array];
+	for(int i=1;i<=5;i++){
+		//拼接图片名
+		NSString *imgName = [NSString
+			stringWithFormat:@"a%d",i];
+		//通过图片名创建图片对象
+		UIImage *img = [UIImage
+		imageNamed:imgName];
+		
+		[imgArr addObject:img];
+	}
+	//设置动画图片
+	self.imageView.animationImages = imgArr;
+	//设置动画播放次数
+	self.imageView.animationRepeatCount=0;
+	//设置播放时长
+	self.imageView.animationDuration=0.5;
+	//开启动画
+	self.imageView st
+}

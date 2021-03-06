@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>image</key>
+		<string>vertu</string>
+		<key>money</key>
+		<string>46800</string>
+		<key>name</key>
+		<string>VERTU纬图 ASTER P 哥特系列商务手机</string>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>8848</string>
+		<key>money</key>
+		<string>23999</string>
+		<key>name</key>
+		<string>8848钛金手机 M6 私人定制版蜥蜴皮系列</string>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>matexs</string>
+		<key>money</key>
+		<string>22000</string>
+		<key>name</key>
+		<string>华为Mate Xs5G超级智能手机</string>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>galaxy</string>
+		<key>money</key>
+		<string>18000</string>
+		<key>name</key>
+		<string>三星Galaxy Fold SM-F9000 折叠屏手机</string>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>mate30rs</string>
+		<key>money</key>
+		<string>13000</string>
+		<key>name</key>
+		<string>华为Mate30 RS保时捷设计5G智能手机</string>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>iphone11</string>
+		<key>money</key>
+		<string>12000</string>
+		<key>name</key>
+		<string>Apple苹果iphone11 Pro MAX全网通手机</string>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>rog</string>
+		<key>money</key>
+		<string>9999</string>
+		<key>name</key>
+		<string>ROG电竞装甲套装智能游戏手机</string>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>oppo</string>
+		<key>money</key>
+		<string>7000</string>
+		<key>name</key>
+		<string>OPPO Find X2 智能拍照手机</string>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>xiaomi</string>
+		<key>money</key>
+		<string>6500</string>
+		<key>name</key>
+		<string>小米10 Pro 骁龙865智能手机</string>
+	</dict>
+</array>
+</plist>

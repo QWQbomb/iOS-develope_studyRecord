@@ -1,0 +1,77 @@
+/** 继续 autolayout
+代码部分 
+*/
+小知识点 ： 平常拖一个label 文字多默认一行
+自动包裹中间的文字 把水平和垂直的居中约束勾起来 宽度也设置
+
+点空白地方触发的事件
+touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent
+* event){
+	self.uiLabel.text=@"abc";
+}
+
+双击有个Relation: Equal
+				Less Than or Equal
+				......
+				
+必须要有4个约束 宽度+高度+距离两边的距离
+
+//2.添加约束
+//2.1 宽度约束
+NSLayoutConstraint *wc = [NSLayoutConstraint
+	constraitWithItem:redView 
+	attribute:NSLayoutAttributeWidth
+	relatedBy:NSLayoutRelatioinEqual toItem:nil
+	attribute:NSLayoutAttributeNotAnAttribute multiplier:0.0
+	constant:100];
+	[redView addConstraint:wc];
+	
+//2.2 高度约束
+NSLayoutConstraint *hc = [NSLayoutConstraint
+	constraitWithItem:redView 
+	attribute:NSLayoutAttributeHeight
+	relatedBy:NSLayoutRelatioinEqual toItem:nil
+	attribute:NSLayoutAttributeNotAnAttribute multiplier:0.0
+	constant:100];
+	[redView addConstraint:hc];
+	
+//2.3 右边约束
+NSLayoutConstraint *rc = [NSLayoutConstraint
+	constraitWithItem:redView 
+	attribute:NSLayoutAttributeRight
+	relatedBy:NSLayoutRelatioinEqual toItem:self.view.safeAreaLayoutGuide
+	attribute:NSLayoutAttributeRight multiplier:1.0
+	constant:0];
+	[self.view addConstraint:hc];
+	//本身的右边与父容器相等 
+//2.4 底部约束
+NSLayoutConstraint *bc = [NSLayoutConstraint
+	constraitWithItem:redView 
+	attribute:NSLayoutAttributeBottom
+	relatedBy:NSLayoutRelatioinEqual toItem:self.view.safeAreaLayoutGuide
+	attribute:NSLayoutAttributeBottom multiplier:1.0
+	constant:0];
+	[self.view addConstraint:hc];
+	
+添加约束的规则：
+在创建约束之后，需要将其添加到作用的 view 上
+
+不同层级的 view 之间， 要添加到最近的共同父 View 上
+
+对于有层次关系的两个 view 之间的约束关系，添加到父容器上
+	
+* VFL * 语言 Visual Format Language 
+可视化格式语言
+为了简化Autolayout的编码而推出的抽象语言
+
+/******添加约束******/
+NSDictionary *views = @{@"red":redView,@"blue":blueView};
+//水平方向
+NSString *hvfl = @"H:|-space-[blue]-space-[red(==blue)]-space-|";
+NSArray *hs = [NSLayoutConstraint
+	constraitWithVisualFormat:hvfl options:kNilOptions
+	metrics:metrics views:views];
+[self.view addConstraint:hs];
+//垂直方向
+NSString *vvfl = @"V:[blue(50)]-space-|"
+	

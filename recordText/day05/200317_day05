@@ -1,0 +1,116 @@
+/***推荐使用 数组 + 模型***/
+自定义控件 
+//使用自定义控件创建美女View
+BeautyView *beautyView = [[BeautyView alloc] init];
+beautyView.frame = CGRectMake(x,y,width,height);
+
+[self.greenView.addSubview:beautyView];
+
+//在BeautyView.h中 
+//基本数据类型用assign
+//在BeautyView.m中
+//类拓展 
+@interface BeautyView()
+/** 图片控件*/
+@property (nonatomic,weak)UIImageView *iconView;
+/** 文字控件*/
+@property (nonatomic,weak)UILabel *titleLabel;
+@end
+//类拓展仅供内部使用,如果外部还要使用则移到头文件中
+@implementation BeautyView
+
+-(instancetype)init{
+	if(self = [super init] )
+	{
+		//创建图片+文字
+
+		
+		//1.创建图片
+		UIImageView *iconView = [[UIImageView alloc] init];
+		//放下面去了
+		iconView.backgroundColor = [UIColor redColor];
+		[self addSubview: iconView];
+		self.iconView = iconView;//让外面的和内部的产生关联
+		
+		//2.创建文字
+		UILabel *titleLabel = [[UILabel alloc] init];
+		//放下面去了
+		titleLabel.backgroundColor = [UIColor yellow];
+		titleLabel.textAlignment = NSTextAlignmentCenter;
+		[self addSubview:titleLabel];
+		self.titleLabel = titleLabel;//让外面的和内部的产生关联
+		
+	}
+	return self;
+}
+//布局子控件(可以拿到frame)
+-(void)layoutSubviews{
+		//获取当前自定义控件的宽度和高度
+		CGFloat width = self.frame.size.width;
+		CGFloat height = self.frame.size.height;
+		//设置frame
+		self.iconView.frame = CGRectMake(0,0,width,height-30);
+		self.titleLabel.frame = CGRectMake(0,height-30,width,30);
+}
+@end
+
+//在ProjectViewController.m中
+...
+beautyView.iconView.image = [UIImage ];
+
+
+
+简单的MVC模型
+Model Control View
+Xib 和 storyboard 的对比(见//.jpg)
+Xib 也是用图形方式展示
+//展示xib的两种展示方式
+
+在实现中 
+-(void)viewDidLoad{
+	[super viewDidLoad]; 
+	//第一种
+	UIView *carView = [[[NSBundle mainBundle] 
+		loadNibNamed:@"car" owner:nil options:nil] firstObject]; 
+	carView.frame = CGRectMake(0,50,414,125);
+	[self.view addSubview:carView];
+	
+	//第二种 不常用
+	UINib *nib = [UINib nibWithNibName:@"Car" bundle:nil];
+	UIView *carView =[[ nib instantiateWithOwner:nil options:nil]
+		lastObject];
+	carView.frame = CGRectMake(0,50,414,125);
+	[self.view addSubview:carView];
+}
+
+@property (nonatomic,***);//UI界面的用weak 实体类用Strong String类型用
+
+//xib设置子控件
+-(void)setBeauty:(Beauty *)beauty{
+	
+}
+
+//ProjectViewController.m中 使用xib方式创建美女view
+先导入 #import
+BeautyView *beautyView = [[BeautyView alloc] init];//不够快速
+//在BeautyView.h中写快速构造方法 用来加载xib
++(instancetype)beautyView;
+//在.m中 实现
+...
++(instancetype)beautyView{
+	return [[[NSBundle mainBundle] loadNibNamed:@"BeautyView" owner:nil
+		options:nil]firstObject];
+}
+...
+//在ProjectViewController.m中
+BeautyView *beautyView = [BeautyView beautyView];
+//指定位置
+beautyView.frame = CGRectMake(x,y,width,height);
+[self.greenView addSubview:beautyView];
+//设置数据
+Beauty *b = beautyArr[index];
+beautyView.beauty = b;
+
+ 
+
+

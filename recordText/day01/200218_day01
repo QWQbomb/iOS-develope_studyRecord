@@ -1,0 +1,33 @@
+30+18实验课
+
+UIKit框架 搭建基本的软件界面
+网络请求、JSON 获取网络数据
+Model、UITableView 显示数据到软件界面
+
+XCode --> OS --> Single View APP
+类型中 IBAction 相当于 void 但不能填 void
+
+实现中：(label控件存在在当前ViewController中)
+-(IBAction)clickRedButton{
+	self.label.textcolor=[UIColor redColor];修改label文字颜色
+	self.label.text=@"";修改label文字
+	self.label.backgroundColor=[UIColor blueColor];修改label背景颜色
+	self.label.textAlignment=NSTextAlignmentCenter;label字体居中
+	self.label.font=[UIFont systemFontOfSize:20.0f];字体放大
+}
+点一下去掉键盘
+-(IBAction)compute{
+	NSString *num1 = self.textNum1.text;
+	NSString *num2 = self.textNum2.text;
+	int n1 = num1.intValue;
+	int n2 = num2.intValue;
+	int sum = n1 + n2;
+	
+	self.labelResult.text=[];
+	
+	[self.textNum1 resignFirstResponder];叫回键盘
+	[self.textNum2 resignFirstResponder];
+	
+	[self.view endEditing:YES];中止所有响应
+}
+	

@@ -1,0 +1,107 @@
+UIScrollView 可滑动的视图框
+
+	//2.设置内容的尺寸
+	self.scrollView.contentSize=CGSizeMake(400,400);
+
+	//3.是否能够滚动
+	self.scrollView.scrollEnable = NO ;
+
+	//4.是否能和用户交互(响应用户的点击等操作)
+	self.scrollView.userInteractionEnable = NO;
+
+	//5.是否有弹簧效果
+	self.scrollView.bounces = NO;
+	
+	//6.不管有没有设置contentSize, 总有弹簧效果
+	self.scrollView.alwaysBounceVertical = YES;
+	self.scrollView.alwaysBounceHorizontal = YES;
+	
+	//7.是否显示滚动条
+	self.scrollView.showVerticalScrollIndicator = NO;
+	self.scrollView.showHorizontalScrollIndicator = NO;
+	
+	//8.设置内容的偏移量
+	self.scrollView.contentOffset = CGPointMake
+		(10,10);//横纵坐标
+	
+	//9.内边距(拖拽后回到的位置)
+	self.scrollView.contentInset = UIEdgeInsetMake\
+		(10,20,30,40);//上 左 下 右
+	
+	contentOffset: 内容到窗口的距离
+	
+	//1.创建UIImageView
+	UIImage *image = [UIImageView alloc];
+	UIImageView *imageView = [[UIImageView alloc]
+		initWithImage:image];
+	[self.scrollView addSubview:imageView];
+	
+	//2.设置内容尺寸 contentSize
+	self.scrollView.contentSize = image.size;
+	
+	//创建自定义事件对象 一定要定义一个强引用 
+	//@property (strong,nonatomic)
+	self.se = [[ScrollViewEvent alloc] init];
+	self.se.imageView = imageView;
+	
+	//3.设置监听
+	self.scrollView.delegate = 
+	
+	//4.设置缩放比例
+	self.scrollView.maximumZoomScale=2.0;
+	self.scrollView.minimumZoomScale=0.5;
+	--1 2 3 4 在 DidLoad 中--
+	//第一种方式
+	CGPoint offset = self.scrollView.contentOffset;
+	offset.y=0;
+	self.scrollView.contentOffset = offset;
+	
+	//第二种方式
+	self.scrollView.contentOffset=
+		CGPointMake(self.scrollView.contentOffset.x,0);
+	
+	//添加动画效果
+	[UIView animateWithDuration:3.0 animations:^{
+		self.scrollView.contentOffset=
+		CGPointMake(self.scrollView.contentOffset.x,0)
+	}];
+	
+	//scrollView自带动画效果
+	[self.scrollView setContentOffset:CGPointMake
+		(self.scrollView.contentOffset.x,0) animated:YES];
+		
+	UIScrollView 代理接口
+	
+	@interface ScrollViewController ()<UIScrollViewDelegate>
+		
+	
+	@end
+	
+	/** 当scrollView正在滚动时会自动调用该方法 */
+	-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+		NSLog(@"--正在滚动--");
+	}
+	-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+		NSLog(@"--即将拖拽--");
+	}
+	/** 当scrollView即将停止拖拽时会自动调用该方法 */
+	-(void)scrollViewWillEndDragging:(UIScrollView *)scrollView
+		withVelocity:(CGPoint)velocity targetContentOffset:
+			(inout CGPoint*)targetContentOffset{
+		NSLog(@"--即将停止拖拽--");
+	}
+	/** 当scrollView已经停止时会自动调用该方法 */
+	-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView
+		willDecelerate:(BOOL)decelerate{
+			NSLog(@"--已经停止拖拽--");
+	}
+	/** 当scrollView减速完毕时会自动调用该方法 */
+	-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+		NSLog(@"--减速完毕--");	
+	}	
+	
+	/** 缩放方法 返回要缩放的子控件 */
+	-(UIView *)viewForZoomingInScroll:(UIScrollView *)scrollView{
+		return self.imageView;//必须要先创建一个全局变量，然后把局部变量赋给全局变量
+	}
+	

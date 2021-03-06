@@ -1,0 +1,151 @@
+运用 Button 实现之前项目的效果
+在ViewControl的实现中
+-(void)viewDidLoad{
+	[super viewDidLoad];
+	//1.创建按钮
+	UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+	//2.设置 frame
+	button.frame = CGRectMake(50,100,300,200);
+	//3.设置背景颜色
+	button.backgroundColor = [UIColor blueColor];
+	
+	//4.设置文字（一定要用方法去设置，否则会失效）
+	[button setTitle:@"添加" forState:UIControlStateNormal];
+	//5.设置y图片
+	[button setImage:[UIImage imageNamed:@"add"]forState:UIColor];
+	
+	//6.改变子控件的位置 button内部方法把它覆盖掉了
+	//文字位置
+	button.titleLabel.frame = CGRectMake(0,0,100,200);
+	//图片位置
+	button.imageView.frame = CGRectMake(100,0,200,200);
+	
+	[self.view addSubView:button];
+}
+
+//新建 MyButton 继承于 UIButton
+//重写两个方法 改变子控件的位置
+
+
+layoutSubviews 设置子控件的位置
+-(void)layoutSubviews{//不仅能获取 也能设置
+	[super layoutSubviews];
+	//获取子控件位置
+	CGFloat width = self.frame.size.width;
+	//设置文字控件的位置
+	self.titleLabel.frame = CGRectMake(0,0,100,50);
+	//设置图片
+	self.imageView.frame = CGRectMake(0,50,150,150);
+}
+
+#import "BeautyButton.h"
+@implementation BeautyButton
+//改变子控件样式
+-(instancetype)initWithFrame:(CGRect)frame{
+	if(self = [super initWithFrame:frame]){
+		//文字居中
+		self.titleLabel.textAlignment = NSTextAlignmentCenter;
+		//文字黑色
+		self setTitleColor:[UIColor blackColor]
+			forState:UIControlStateNormal;
+	}
+	return self;
+}
+
+//改变按钮中 图片和文字 子控件的位置
+-(void)layoutSubviews{
+	[super layoutSubviews];
+	//获取自身尺寸
+	CGFloat width = self.frame.size.width;
+	CGFloat height = self.frame.size.height;
+	//设置图片
+	self.imageView.frame = CGRectMake(0,0,width,height-30);
+	//设置文字
+	self.titleLabel.frame = CGRectMake(0,height-30,width,30);
+}
+-(void)setBeauty:(Beauty *)beauty{
+	_beauty = beauty;
+	//设置子控件数据
+	//设置图片 要走方法
+	//self.imageView.image = [UIImage imageNamed:beauty.icon];
+	[self.setImage:[UIImage imageNamed:beauty.icon]
+		forState:UIControlStateNormal];
+	//设置文字
+	//self.titleLabel.text = beauty.name;
+	[self.setTitle:beauty.name forState:UIControlStateNormal];
+}
+
+ViewController中
+//使用button来实现
+BeautyButton *bb  =[[BeautyButton alloc]init];
+bb.frame = CGRectMake(x,y,width,height);
+[self.greenView addSubView:bb];
+Beauty *b = beautyArr[index];
+bb.beauty = b;
+
+//动画
+//平移动画
+-(IBAction)translate{
+	//渐变动画
+	//方式一
+	//1.开始动画
+	[UIView beginAnimations:nil context:nil];
+	[UIView setAnimationDuration:3.0]
+	
+	//2.动画代码
+	CGRect frame  = self.imageView.frame;
+	frame.origin.y+=50;//往下平移
+	self.imageView.frame=frame;
+	
+	//3.开始动画
+	[UIView commitAnimations];
+	
+	//方式二
+	[UIView animateWithDuration:2.0 animations:^{
+			//2.动画代码
+		CGRect frame  = self.imageView.frame;
+		frame.origin.y+=50;//往下平移
+		self.imageView.frame=frame;
+	} completion:^(BOOL finished){
+		NSLog(@"move OK!!");
+	}];
+	
+	UIView animateWithDuration:2.0
+		delay:()
+		options:()
+		animations:^()
+		completion:^()
+		
+	//缩放动画
+	-(IBAction)scale{
+		[UIView animateWithDuration:3.0 delay:2.0 options:UIViewAnimationOptionCurveEaseOut
+			animations:^{
+				//2.动画代码
+				CGRect frame = self.imageView.frame;
+				frame.size = CGSizeMake(10,20);
+				self.imageView.frame = frame;
+			} completion:^(BOOL finished){
+				[UIView animateWithDuration:3.0 delay:2.0 options:UIViewAnimationOptionCurveEaseOut
+				CGRect frame = self.imageView.frame;
+				frame.size = CGSizeMake(100,200);
+				self.imageView.frame = frame;
+			}];}];
+	}
+	
+	//透明度动画
+	-(IBAction)alpha{
+		[UIView animateWithDuration:3.0 delay:2.0 options:UIViewAnimationOptionCurveEaseOut
+			animations:^{
+				//2.动画代码
+				self.imageView.alpha -=0.99;
+			} completion:^(BOOL finished){
+				//完成后再执行一个动画
+				[UIView animateWithDuration:3.0 delay:2.0 options:UIViewAnimationOptionCurveEaseOut
+			animations:^{
+				//2.动画代码
+				self.imageView.alpha +=0.99;
+			}];
+			}];
+	}
+	
+}

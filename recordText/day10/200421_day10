@@ -1,0 +1,33 @@
+现在学的过程中 都要导入的包是 UIKit
+/** 
+重点: autolayout
+IOS 6 开始引入
+自 iOS7 (Xcode 5) 开始 效率得到很大提升
+能很轻松地解决屏幕适配问题
+
+Aoturesizing 仅仅能解决子控件和父控件之间的相对关系问题
+相比之下 Autolayout 的功能比 Aoturesizing 强大很多
+能解决任何控件之间的相对关系问题
+
+2个核心概念
+约束: 通过给控件添加约束，来决定控件的位置和尺寸
+参照: 在添加约束时，是依照谁来添加（可以是父控件或者兄弟控件）
+*/
+
+Autolayout 
+右下角三个点 配置关键
+
+中间的点: Add New Constraints
+左边 Safe Area 去掉刘海和操作条的 中间空间
+
+参照物 默认查找最近的
+一定要有 4 个约束
+
+选中两个时 选择 Equals width/height... 等宽 等高
+按住window键拖拽指定对象也行
+
+Multiplier 指定一半的长度等关系
+被参照的view × Multiplier + 偏移量
+
+必须要有4个约束 宽度+高度+距离两边的距离
+

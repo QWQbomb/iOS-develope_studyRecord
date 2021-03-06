@@ -1,0 +1,22 @@
+/** 布局 */
+/** UIViewAutoresizingFlexibleLeftMargin:距离父控件的左边可伸缩
+	UIViewAutoresizingFlexibleButtomMargin:距离父控件的底部可伸缩
+	UIViewAutoresizingFlexibleRightMargin:距离父控件的右边可伸缩
+	UIViewAutoresizingFlexibleTopMargin:距离父控件的顶部可伸缩
+	
+	UIViewAutoresizingFlexibleHeight:高度随着父控件伸缩
+	UIViewAutoresizingFlexibleWidth:宽度随着父控件伸缩
+ */
+-(void)viewDidLoad{
+	UIView *greenView = [[UIView alloc]init];
+	greenView.backgroundColor = [UIColor greenColor];
+	
+	greenView.frame = CGRectMake(self.view.frame.size.width-100,
+	self.view.frame.size.height-100, 100, 100);
+	greenView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin
+	|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleTopMargin
+	;
+	[self.view.addSubview:greenView];
+}
+
+屏幕适配 写固定值-> autoresizing -> autolayout -> sizeClasses
